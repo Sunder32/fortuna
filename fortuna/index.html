@@ -1,0 +1,155 @@
+﻿<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Адское Колесо Судьбы</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Metal+Mania&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="src/styles/redesign.css">
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600&family=Metal+Mania&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="main-container">
+    <aside class="left-panel">
+      <header class="manuscript-header">
+        <div class="manuscript-title">Манускрипт Проклятого Кода</div>
+        <h1 class="main-title">
+          <span class="accent">Адское</span>
+          Колесо<br>
+          Судьбы
+        </h1>
+        <p class="subtitle">
+          Запусти цикл преисподней и<br>
+          позволь багам определить, чей<br>
+          код будет отвергнут.<br>
+          Коммить новые модули в<br>
+          репозиторий и жди вердикта<br>
+          от великого...
+        </p>
+      </header>
+
+      <div class="features-list">
+        <div class="feature-item">
+          <span class="feature-marker">◆</span>
+          <span class="feature-text">Заполняй наказания грешникам — записи мгновенно появятся на колесе</span>
+        </div>
+        <div class="feature-item">
+          <span class="feature-marker">◆</span>
+          <span class="feature-text">Включай шепот бездны и тогда вердикт будет мгновенным</span>
+        </div>
+        <div class="feature-item">
+          <span class="feature-marker">◆</span>
+          <span class="feature-text">Пульсирующая вспышка укажет на кару, когда колесо остановится</span>
+        </div>
+      </div>
+
+      <div class="ritual-protocol">
+        <h3 class="protocol-title">Ритуальный протокол</h3>
+        <ol class="protocol-list">
+          <li>Запиши варинат кары в сектора и закрепи их в книге.</li>
+          <li>Призови вращение, наблюдая за вспологами огня.</li>
+          <li>Обмани приговор, когда стрелка замрёт на нежеланной каре.</li>
+        </ol>
+      </div>
+    </aside>
+
+    <main class="center-stage">
+      <div class="stage-header">
+        <div class="result-display">
+          <span class="result-label">Вердикт</span>
+          <div class="result-value" id="resultValue">—</div>
+        </div>
+      </div>
+
+      <div id="threeMount" class="wheel-container"></div>
+
+      <div class="wheel-controls">
+        <button id="spinBtn" class="btn-spin">Призвать вращение</button>
+        
+        <div class="sound-controls">
+          <label class="sound-toggle">
+            <input id="clickSoundChk" type="checkbox" checked>
+            <span class="toggle-visual"></span>
+            <span class="toggle-label">Голос клыков</span>
+          </label>
+          <label class="sound-toggle">
+            <input id="bgSoundChk" type="checkbox">
+            <span class="toggle-visual"></span>
+            <span class="toggle-label">Шёпот бездны</span>
+          </label>
+          <label class="sound-toggle">
+            <input id="modalButtonsChk" type="checkbox" checked>
+            <span class="toggle-visual"></span>
+            <span class="toggle-label">Искушение судьбой</span>
+          </label>
+        </div>
+      </div>
+    </main>
+
+    <aside class="right-panel">
+      <div class="record-book">
+        <header class="book-header">
+          <div class="book-title">Книга записи</div>
+          <h2 class="book-main-title">Пылающий реестр</h2>
+          <p class="book-description">
+            Вноси задачи для тех, кто готов<br>
+            принять мудрость через боль.
+            — ни одна жертва не скроется от<br>
+            вращающегося ока.
+          </p>
+        </header>
+
+        <div class="input-section">
+          <label class="input-label">Новый сектор</label>
+          <input 
+            id="sectorInput" 
+            class="sector-input" 
+            placeholder="Добавить сектор (например, Клык)"
+            maxlength="70"
+          >
+          <div class="action-buttons">
+            <button id="addBtn" class="btn btn-add">Записать</button>
+            <button id="clearBtn" class="btn btn-clear">Очистить книгу</button>
+          </div>
+        </div>
+
+        <div class="sectors-section">
+          <div class="sectors-header">
+            <span class="sectors-count">Записано: <span id="sectorsCount">0</span></span>
+            <span class="sectors-limit">Лимит: 24</span>
+          </div>
+          <ul id="sectorsList" class="sectors-list"></ul>
+        </div>
+
+        <div class="book-footer">
+          <p class="footer-note">
+            Судьба грешника решится после вращения.<br>
+            Призови вращение, нажав кнопку. 
+          </p>
+          <p class="footer-warning">
+            Сектора поджигают вездцы, если<br>
+            деревято указатель на грани.
+          </p>
+          <p class="footer-hint">
+            Звуки можно приглушить в панели у<br>
+            колеса, но бездна любит слушаньше.
+          </p>
+        </div>
+      </div>
+    </aside>
+  </div>
+
+  <script type="importmap">
+  {
+    "imports": {
+      "three": "https://cdn.jsdelivr.net/npm/three@0.159.0/build/three.module.js",
+      "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.159.0/examples/jsm/"
+    }
+  }
+  </script>
+
+  <script type="module" src="src/js/app.js"></script>
+</body>
+</html>
