@@ -1,0 +1,337 @@
+/* Анимированный список секторов в адском стиле */
+
+.sectors-list-wrapper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+/* Скрытие скроллбара (опционально) */
+.sectors-list.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.sectors-list.hide-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Улучшенный скроллбар */
+.sectors-list::-webkit-scrollbar {
+  width: 8px;
+}
+
+.sectors-list::-webkit-scrollbar-track {
+  background: rgba(10, 1, 1, 0.5);
+  border-radius: 4px;
+}
+
+.sectors-list::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #ff6b45 0%, #c53030 100%);
+  border-radius: 4px;
+  box-shadow: 0 0 10px rgba(255, 107, 69, 0.5);
+}
+
+.sectors-list::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, #ff8844 0%, #d9443f 100%);
+  box-shadow: 0 0 15px rgba(255, 136, 68, 0.8);
+}
+
+/* Градиенты для скроллинга */
+.scroll-gradient-top {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 8px; /* Отступ для скроллбара */
+  height: 60px;
+  background: linear-gradient(to bottom, 
+    rgba(26, 10, 10, 1) 0%, 
+    rgba(26, 10, 10, 0.8) 40%,
+    transparent 100%
+  );
+  pointer-events: none;
+  z-index: 10;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.scroll-gradient-bottom {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 8px; /* Отступ для скроллбара */
+  height: 100px;
+  background: linear-gradient(to top, 
+    rgba(26, 10, 10, 1) 0%, 
+    rgba(26, 10, 10, 0.9) 30%,
+    transparent 100%
+  );
+  pointer-events: none;
+  z-index: 10;
+  opacity: 1;
+  transition: opacity 0.3s ease;
+}
+
+/* Анимация появления элементов списка */
+.sector-item {
+  opacity: 0;
+  transform: scale(0.7);
+  animation: sectorAppear 0.3s ease-out forwards;
+}
+
+@keyframes sectorAppear {
+  0% {
+    opacity: 0;
+    transform: scale(0.7) translateX(-20px);
+  }
+  60% {
+    transform: scale(1.05) translateX(5px);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) translateX(0);
+  }
+}
+
+/* Задержка анимации для каждого элемента */
+.sector-item:nth-child(1) { animation-delay: 0.05s; }
+.sector-item:nth-child(2) { animation-delay: 0.10s; }
+.sector-item:nth-child(3) { animation-delay: 0.15s; }
+.sector-item:nth-child(4) { animation-delay: 0.20s; }
+.sector-item:nth-child(5) { animation-delay: 0.25s; }
+.sector-item:nth-child(6) { animation-delay: 0.30s; }
+.sector-item:nth-child(7) { animation-delay: 0.35s; }
+.sector-item:nth-child(8) { animation-delay: 0.40s; }
+
+/* Улучшенный hover эффект */
+.sector-item {
+  transition: all 0.2s ease;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
+
+.sector-item::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, 
+    transparent 0%, 
+    rgba(255, 107, 69, 0.2) 50%, 
+    transparent 100%
+  );
+  transition: left 0.5s ease;
+}
+
+.sector-item:hover::before {
+  left: 100%;
+}
+
+.sector-item:hover {
+  background: linear-gradient(135deg, #3a1010 0%, #2a0808 100%);
+  transform: translateX(5px) scale(1.02);
+  box-shadow: 
+    -3px 0 15px rgba(255, 107, 69, 0.3),
+    inset 0 0 20px rgba(255, 107, 69, 0.1);
+  border-left: 3px solid #ff6b45;
+}
+
+/* Пульсация для выбранного элемента */
+.sector-item.selected {
+  background: linear-gradient(135deg, #4a1515 0%, #3a0a0a 100%);
+  border-left: 4px solid #ff8844;
+  box-shadow: 
+    -5px 0 20px rgba(255, 136, 68, 0.5),
+    inset 0 0 30px rgba(255, 136, 68, 0.2);
+  animation: selectedPulse 2s ease-in-out infinite;
+}
+
+@keyframes selectedPulse {
+  0%, 100% {
+    box-shadow: 
+      -5px 0 20px rgba(255, 136, 68, 0.5),
+      inset 0 0 30px rgba(255, 136, 68, 0.2);
+  }
+  50% {
+    box-shadow: 
+      -8px 0 30px rgba(255, 136, 68, 0.8),
+      inset 0 0 40px rgba(255, 136, 68, 0.3);
+  }
+}
+
+/* Эффект "огненного свечения" при наведении */
+.sector-item::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 4px;
+  height: 0;
+  background: linear-gradient(180deg, 
+    transparent 0%,
+    #ff6b45 20%,
+    #ffaa66 50%,
+    #ff6b45 80%,
+    transparent 100%
+  );
+  transform: translateY(-50%);
+  transition: height 0.3s ease;
+  box-shadow: 0 0 10px #ff6b45;
+}
+
+.sector-item:hover::after {
+  height: 80%;
+}
+
+/* Анимация удаления */
+@keyframes sectorRemove {
+  0% {
+    opacity: 1;
+    transform: scale(1) translateX(0);
+  }
+  50% {
+    opacity: 0.5;
+    transform: scale(0.9) translateX(-30px) rotateZ(-5deg);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(0.5) translateX(-100px) rotateZ(-15deg);
+    height: 0;
+    margin: 0;
+    padding: 0;
+  }
+}
+
+.sector-item.removing {
+  animation: sectorRemove 0.4s ease-out forwards;
+}
+
+/* Улучшенная типография */
+.sector-text {
+  position: relative;
+  z-index: 1;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+  transition: all 0.2s ease;
+}
+
+.sector-item:hover .sector-text {
+  text-shadow: 
+    0 2px 8px rgba(255, 107, 69, 0.6),
+    0 0 20px rgba(255, 107, 69, 0.3);
+  transform: translateX(5px);
+}
+
+/* Индикатор позиции в списке */
+.sector-item .sector-index {
+  position: absolute;
+  left: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 0.7em;
+  opacity: 0.4;
+  font-weight: 600;
+  color: #ff6b45;
+  text-shadow: 0 0 5px rgba(255, 107, 69, 0.5);
+  transition: all 0.2s ease;
+}
+
+.sector-item:hover .sector-index {
+  opacity: 0.7;
+  left: 15px;
+}
+
+/* Кнопки действий (редактировать/удалить) */
+.sector-actions {
+  opacity: 0;
+  transform: translateX(10px);
+  transition: all 0.2s ease;
+}
+
+.sector-item:hover .sector-actions {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* Эффект "тлеющих углей" на фоне */
+.sectors-list-wrapper::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: 
+    radial-gradient(circle at 20% 30%, rgba(255, 107, 69, 0.03) 0%, transparent 50%),
+    radial-gradient(circle at 80% 70%, rgba(197, 48, 48, 0.03) 0%, transparent 50%);
+  pointer-events: none;
+  animation: embersGlow 8s ease-in-out infinite;
+}
+
+@keyframes embersGlow {
+  0%, 100% {
+    opacity: 0.5;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+/* Адаптив для мобильных */
+@media (max-width: 768px) {
+  .scroll-gradient-top,
+  .scroll-gradient-bottom {
+    right: 0; /* На мобильных скроллбар скрыт */
+  }
+  
+  .sector-item:hover {
+    transform: translateX(3px) scale(1.01);
+  }
+  
+  .sector-item::after {
+    width: 3px;
+  }
+}
+
+/* Пустое состояние */
+.sectors-list-empty {
+  text-align: center;
+  padding: 40px 20px;
+  color: rgba(255, 170, 102, 0.5);
+  font-style: italic;
+  animation: fadeInOut 3s ease-in-out infinite;
+}
+
+@keyframes fadeInOut {
+  0%, 100% {
+    opacity: 0.5;
+  }
+  50% {
+    opacity: 0.8;
+  }
+}
+
+.sectors-list-empty::before {
+  content: '🔥';
+  display: block;
+  font-size: 3em;
+  margin-bottom: 10px;
+  animation: flameFlicker 2s ease-in-out infinite;
+}
+
+@keyframes flameFlicker {
+  0%, 100% {
+    transform: scale(1) rotate(0deg);
+    filter: brightness(1);
+  }
+  25% {
+    transform: scale(1.1) rotate(-5deg);
+    filter: brightness(1.2);
+  }
+  75% {
+    transform: scale(0.95) rotate(5deg);
+    filter: brightness(0.9);
+  }
+}

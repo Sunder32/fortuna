@@ -3,99 +3,132 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Адское Колесо Судьбы - запусти механизм преисподней и позволь пылающим рунам определить твою судьбу" />
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://cdn.jsdelivr.net 'unsafe-inline'; style-src 'self' https://fonts.googleapis.com 'unsafe-inline'; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; media-src 'self'; connect-src 'self';">
+  <meta name="theme-color" content="#1a0a0a">
   <title>Адское Колесо Судьбы</title>
+  
+  <!-- Open Graph -->
+  <meta property="og:title" content="Адское Колесо Судьбы">
+  <meta property="og:description" content="Запусти механизм преисподней и позволь пылающим рунам определить твою судьбу">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="assets/img/preview.jpg">
+  
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Адское Колесо Судьбы">
+  <meta name="twitter:description" content="Запусти механизм преисподней">
+  
+  <!-- Favicon -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🔥</text></svg>">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Metal+Mania&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="src/styles/redesign.css">
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600&family=Metal+Mania&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+  <link rel="preload" href="assets/audio/ambient.mp3" as="audio" type="audio/mpeg">
+  <link rel="stylesheet" href="scr/styles/index.css">
 </head>
 <body>
   <div class="main-container">
+    <!-- Левая панель -->
     <aside class="left-panel">
       <header class="manuscript-header">
-        <div class="manuscript-title">Манускрипт Проклятого Кода</div>
+        <div class="manuscript-title">Манускрипт из Недр</div>
         <h1 class="main-title">
           <span class="accent">Адское</span>
           Колесо<br>
           Судьбы
         </h1>
         <p class="subtitle">
-          Запусти цикл преисподней и<br>
-          позволь багам определить, чей<br>
-          код будет отвергнут.<br>
-          Коммить новые модули в<br>
-          репозиторий и жди вердикта<br>
-          от великого...
+          Запусти механизм преисподней и<br>
+          позволь пылающим рунам<br>
+          определить, кто испытает гнев<br>
+          демонов. Записывай имена,<br>
+          раскалённые сектора, и жди<br>
+          раскат вердикта.
         </p>
       </header>
 
       <div class="features-list">
         <div class="feature-item">
           <span class="feature-marker">◆</span>
-          <span class="feature-text">Заполняй наказания грешникам — записи мгновенно появятся на колесе</span>
+          <span class="feature-text">Заполняй книгу жертв — записи мгновенно помещаются на колесе</span>
         </div>
         <div class="feature-item">
           <span class="feature-marker">◆</span>
-          <span class="feature-text">Включай шепот бездны и тогда вердикт будет мгновенным</span>
+          <span class="feature-text">Включай щелчок бездны в миг, когда стрелка касается грани</span>
         </div>
         <div class="feature-item">
           <span class="feature-marker">◆</span>
-          <span class="feature-text">Пульсирующая вспышка укажет на кару, когда колесо остановится</span>
+          <span class="feature-text">Пульсирующая вспышка укажет на избранного, когда колесо остановится</span>
         </div>
       </div>
 
       <div class="ritual-protocol">
         <h3 class="protocol-title">Ритуальный протокол</h3>
         <ol class="protocol-list">
-          <li>Запиши варинат кары в сектора и закрепи их в книге.</li>
-          <li>Призови вращение, наблюдая за вспологами огня.</li>
-          <li>Обмани приговор, когда стрелка замрёт на нежеланной каре.</li>
+          <li>Запиши сектора и закрепи их в книге.</li>
+          <li>Призови вращение, наблюдая за всполохами огня.</li>
+          <li>Узри приговор, когда стрелка замрёт на жертве.</li>
         </ol>
       </div>
     </aside>
 
+    <!-- Центральная часть с колесом -->
     <main class="center-stage">
       <div class="stage-header">
         <div class="result-display">
           <span class="result-label">Вердикт</span>
-          <div class="result-value" id="resultValue">—</div>
+          <div class="result-value" id="resultValue" aria-live="polite" aria-atomic="true">—</div>
         </div>
       </div>
 
-      <div id="threeMount" class="wheel-container"></div>
+      <div class="wheel-wrapper">
+        <div id="threeMount" class="wheel-container"></div>
+      </div>
 
-      <div class="wheel-controls">
-        <button id="spinBtn" class="btn-spin">Призвать вращение</button>
+      <div class="controls-wrapper">
+        <button id="spinBtn" class="btn-spin" aria-label="Запустить колесо судьбы" aria-keyshortcuts="Space">ПРИЗВАТЬ ВРАЩЕНИЕ</button>
+        <div class="keyboard-hint">Или нажмите ПРОБЕЛ</div>
         
         <div class="sound-controls">
           <label class="sound-toggle">
-            <input id="clickSoundChk" type="checkbox" checked>
+            <input id="clickSoundChk" type="checkbox" checked aria-label="Звуковые щелчки при попадании стрелки на зубец">
             <span class="toggle-visual"></span>
-            <span class="toggle-label">Голос клыков</span>
+            <span class="toggle-label" title="Звук щелчка при прохождении каждого зубца колеса">Голос клыков</span>
           </label>
           <label class="sound-toggle">
-            <input id="bgSoundChk" type="checkbox">
+            <input id="bgSoundChk" type="checkbox" aria-label="Фоновая атмосферная музыка">
             <span class="toggle-visual"></span>
-            <span class="toggle-label">Шёпот бездны</span>
+            <span class="toggle-label" title="Непрерывный фоновый звук адской атмосферы">Шёпот бездны</span>
           </label>
           <label class="sound-toggle">
-            <input id="modalButtonsChk" type="checkbox" checked>
+            <input id="fateChk" type="checkbox" aria-label="Возможность отвергнуть результат и перекрутить">
             <span class="toggle-visual"></span>
-            <span class="toggle-label">Искушение судьбой</span>
+            <span class="toggle-label" title="После результата можно отвергнуть судьбу и повторить вращение">Искушение судьбой</span>
+          </label>
+          <label class="sound-toggle">
+            <input id="eliminationChk" type="checkbox" aria-label="Удалять выпавшие секторы автоматически">
+            <span class="toggle-visual"></span>
+            <span class="toggle-label" title="Выпавший сектор автоматически удаляется из колеса">Режим исключения</span>
+          </label>
+          <label class="sound-toggle chaos-mode">
+            <input id="chaosChk" type="checkbox" aria-label="Режим хаоса с экстремальной случайностью">
+            <span class="toggle-visual"></span>
+            <span class="toggle-label" title="Множественные перемешивания, случайные паузы, внезапные ускорения и смена направления">🌀 РЕЖИМ ХАОСА</span>
           </label>
         </div>
       </div>
     </main>
 
+    <!-- Правая панель -->
     <aside class="right-panel">
       <div class="record-book">
         <header class="book-header">
           <div class="book-title">Книга записи</div>
           <h2 class="book-main-title">Пылающий реестр</h2>
           <p class="book-description">
-            Вноси задачи для тех, кто готов<br>
-            принять мудрость через боль.
+            Записывай новые имена и<br>
+            заклинания запомнят их навечно<br>
             — ни одна жертва не скроется от<br>
             вращающегося ока.
           </p>
@@ -103,44 +136,70 @@
 
         <div class="input-section">
           <label class="input-label">Новый сектор</label>
-          <input 
+          <textarea 
             id="sectorInput" 
             class="sector-input" 
-            placeholder="Добавить сектор (например, Клык)"
-            maxlength="70"
-          >
+            placeholder="Добавить сектор (Enter для записи)
+
+📋 Вставка списком:
+вар 1
+вар 2
+вар 3
+
+Или перетащите файл сюда для импорта"
+            rows="3"
+            maxlength="5000"
+          ></textarea>
           <div class="action-buttons">
-            <button id="addBtn" class="btn btn-add">Записать</button>
-            <button id="clearBtn" class="btn btn-clear">Очистить книгу</button>
+            <button id="addBtn" class="btn btn-add" aria-label="Добавить сектор в колесо">Записать</button>
+            <button id="clearBtn" class="btn btn-clear" aria-label="Удалить все секторы">Очистить книгу</button>
+          </div>
+          
+          <div class="import-export-section">
+            <button id="exportBtn" class="btn btn-export" title="Экспортировать список" aria-label="Экспортировать список секторов">📥 Экспорт</button>
+            <button id="importBtn" class="btn btn-import" title="Импортировать список" aria-label="Импортировать список секторов из файла">📤 Импорт</button>
+            <input type="file" id="importFile" accept=".json,.txt,.csv,.html,.md,.xml,.xlsx,.xls,.docx,.doc,.jpg,.jpeg,.png,.gif,.bmp,.webp" class="visually-hidden" aria-label="Выбрать файл для импорта">
           </div>
         </div>
 
         <div class="sectors-section">
-          <div class="sectors-header">
-            <span class="sectors-count">Записано: <span id="sectorsCount">0</span></span>
-            <span class="sectors-limit">Лимит: 24</span>
+          <!-- Красивое окошко списка -->
+          <div class="sectors-preview-panel">
+            <div class="sectors-preview-header">
+              <span class="sectors-preview-icon">📜</span>
+              <span class="sectors-preview-title">СПИСОК</span>
+              <span class="sectors-preview-count" id="sectorsCountBadge">0</span>
+            </div>
+            <div class="sectors-preview-body" id="sectorsPreview">
+              <div class="sectors-preview-empty">Список пуст</div>
+            </div>
           </div>
-          <ul id="sectorsList" class="sectors-list"></ul>
-        </div>
-
-        <div class="book-footer">
-          <p class="footer-note">
-            Судьба грешника решится после вращения.<br>
-            Призови вращение, нажав кнопку. 
-          </p>
-          <p class="footer-warning">
-            Сектора поджигают вездцы, если<br>
-            деревято указатель на грани.
-          </p>
-          <p class="footer-hint">
-            Звуки можно приглушить в панели у<br>
-            колеса, но бездна любит слушаньше.
-          </p>
+          
+          <!-- Скрытый список для совместимости -->
+          <ul id="sectorsList" class="sectors-list visually-hidden" role="list" aria-label="Список секторов колеса"></ul>
         </div>
       </div>
     </aside>
   </div>
 
+  <!-- 📚 Внешние библиотеки для импорта -->
+  <!-- SheetJS для Excel -->
+  <!-- SheetJS для Excel -->
+  <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js" 
+          crossorigin="anonymous"></script>
+  
+  <!-- Mammoth.js для Word -->
+  <script src="https://cdn.jsdelivr.net/npm/mammoth@1.6.0/mammoth.browser.min.js"
+          crossorigin="anonymous"></script>
+  
+  <!-- Tesseract.js для OCR (опционально - тяжелая библиотека ~2MB) -->
+  <!-- Раскомментируйте для поддержки импорта из скриншотов -->
+  <!--
+  <script src="https://cdn.jsdelivr.net/npm/tesseract.js@4.1.1/dist/tesseract.min.js"
+          crossorigin="anonymous"></script>
+  -->
+
+  <!-- Three.js & Postprocessing -->
   <script type="importmap">
   {
     "imports": {
@@ -150,6 +209,7 @@
   }
   </script>
 
-  <script type="module" src="src/js/app.js"></script>
+  <!-- Скрипты приложения -->
+  <script type="module" src="scr/js/app.js"></script>
 </body>
 </html>

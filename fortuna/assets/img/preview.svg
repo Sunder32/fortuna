@@ -1,0 +1,91 @@
+<svg width="1200" height="630" xmlns="http://www.w3.org/2000/svg">
+  <!-- Фон -->
+  <defs>
+    <radialGradient id="bgGrad" cx="50%" cy="50%">
+      <stop offset="0%" style="stop-color:#2a0a0a;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#0a0101;stop-opacity:1" />
+    </radialGradient>
+    
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="4" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  
+  <rect width="1200" height="630" fill="url(#bgGrad)"/>
+  
+  <!-- Декоративные огненные круги -->
+  <circle cx="600" cy="315" r="250" fill="none" stroke="#ff6b45" stroke-width="3" opacity="0.3"/>
+  <circle cx="600" cy="315" r="200" fill="none" stroke="#ff8844" stroke-width="2" opacity="0.5"/>
+  <circle cx="600" cy="315" r="150" fill="none" stroke="#ffaa66" stroke-width="1" opacity="0.7"/>
+  
+  <!-- Главное колесо (упрощенное) -->
+  <g transform="translate(600, 315)">
+    <!-- Центральный круг -->
+    <circle r="140" fill="#3a0d0d" stroke="#ffc99d" stroke-width="4" filter="url(#glow)"/>
+    
+    <!-- Секторы (8 штук для демонстрации) -->
+    <g id="sectors">
+      <path d="M 0,-140 L 0,-80 A 80,80 0 0,1 56.57,-56.57 L 99,-99 A 140,140 0 0,0 0,-140" 
+            fill="#ff6b45" opacity="0.8"/>
+      <path d="M 0,-140 L 0,-80 A 80,80 0 0,1 56.57,-56.57 L 99,-99 A 140,140 0 0,0 0,-140" 
+            fill="#d9443f" opacity="0.8" transform="rotate(45)"/>
+      <path d="M 0,-140 L 0,-80 A 80,80 0 0,1 56.57,-56.57 L 99,-99 A 140,140 0 0,0 0,-140" 
+            fill="#ff8938" opacity="0.8" transform="rotate(90)"/>
+      <path d="M 0,-140 L 0,-80 A 80,80 0 0,1 56.57,-56.57 L 99,-99 A 140,140 0 0,0 0,-140" 
+            fill="#c53030" opacity="0.8" transform="rotate(135)"/>
+      <path d="M 0,-140 L 0,-80 A 80,80 0 0,1 56.57,-56.57 L 99,-99 A 140,140 0 0,0 0,-140" 
+            fill="#ffa250" opacity="0.8" transform="rotate(180)"/>
+      <path d="M 0,-140 L 0,-80 A 80,80 0 0,1 56.57,-56.57 L 99,-99 A 140,140 0 0,0 0,-140" 
+            fill="#d33234" opacity="0.8" transform="rotate(225)"/>
+      <path d="M 0,-140 L 0,-80 A 80,80 0 0,1 56.57,-56.57 L 99,-99 A 140,140 0 0,0 0,-140" 
+            fill="#ff7844" opacity="0.8" transform="rotate(270)"/>
+      <path d="M 0,-140 L 0,-80 A 80,80 0 0,1 56.57,-56.57 L 99,-99 A 140,140 0 0,0 0,-140" 
+            fill="#e14b3a" opacity="0.8" transform="rotate(315)"/>
+    </g>
+    
+    <!-- Внутренний круг -->
+    <circle r="50" fill="#1a0505" stroke="#ff6b45" stroke-width="2"/>
+  </g>
+  
+  <!-- Указатель -->
+  <g transform="translate(600, 50)">
+    <path d="M -15,0 L 15,0 L 0,30 Z" fill="#ffc99d" filter="url(#glow)"/>
+  </g>
+  
+  <!-- Текст -->
+  <text x="600" y="520" 
+        font-family="Arial, sans-serif" 
+        font-size="72" 
+        font-weight="bold" 
+        fill="#ff6b45" 
+        text-anchor="middle"
+        filter="url(#glow)">
+    🔥 АДСКОЕ КОЛЕСО СУДЬБЫ
+  </text>
+  
+  <text x="600" y="570" 
+        font-family="Arial, sans-serif" 
+        font-size="28" 
+        fill="#ffaa66" 
+        text-anchor="middle">
+    Запусти механизм преисподней и узри свою судьбу
+  </text>
+  
+  <!-- Декоративные огненные искры -->
+  <circle cx="150" cy="100" r="3" fill="#ff8844" opacity="0.8">
+    <animate attributeName="opacity" values="0.8;0.3;0.8" dur="2s" repeatCount="indefinite"/>
+  </circle>
+  <circle cx="1050" cy="150" r="4" fill="#ff6b45" opacity="0.6">
+    <animate attributeName="opacity" values="0.6;0.2;0.6" dur="3s" repeatCount="indefinite"/>
+  </circle>
+  <circle cx="200" cy="500" r="2" fill="#ffaa66" opacity="0.7">
+    <animate attributeName="opacity" values="0.7;0.3;0.7" dur="2.5s" repeatCount="indefinite"/>
+  </circle>
+  <circle cx="1000" cy="550" r="3" fill="#ff7844" opacity="0.5">
+    <animate attributeName="opacity" values="0.5;0.1;0.5" dur="2.2s" repeatCount="indefinite"/>
+  </circle>
+</svg>

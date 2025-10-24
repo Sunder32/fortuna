@@ -1,0 +1,23 @@
+@import './base/reset.css';
+@import './base/typography.css';
+
+@import './layout/grid.css';
+@import './layout/fullscreen.css'; /* НОВАЯ FULLSCREEN АДАПТАЦИЯ */
+@import './layout/left-panel.css';
+@import './layout/center-stage.css';
+@import './layout/right-panel.css';
+
+@import 'components/input-form.css';
+@import 'components/sectors-list.css';
+@import 'components/sectors-modal.css'; /* Новое модальное окно */
+@import 'components/view-sectors-btn.css'; /* Кнопка просмотра */
+@import 'components/sound-controls.css';
+@import 'components/spin-button.css';
+@import 'components/result-display.css';
+@import 'components/victory-modal.css';
+@import 'components/wheel-stage.css';
+@import 'components/import-export.css';
+@import 'components/toast.css';
+@import 'components/animated-list.css';
+
+@import './responsive/mobile.css';

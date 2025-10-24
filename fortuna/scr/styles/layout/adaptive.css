@@ -1,0 +1,552 @@
+/* 
+ * АДАПТИВНАЯ СИСТЕМА ДЛЯ ВСЕХ РАЗРЕШЕНИЙ v2.0
+ * Улучшенная версия с правильными пропорциями
+ */
+
+/* === БАЗОВАЯ СТРУКТУРА === */
+.main-container {
+  width: 100%;
+  max-width: 100vw;
+  min-height: 100vh;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: row;
+  gap: clamp(15px, 2.5vw, 30px);
+  padding: clamp(15px, 2.5vw, 30px);
+  position: relative;
+  z-index: 2;
+  box-sizing: border-box;
+}
+
+/* === УЛЬТРА-ШИРОКИЕ МОНИТОРЫ (3440px+) === */
+@media (min-width: 3440px) {
+  .main-container {
+    max-width: 2800px;
+    margin: 0 auto;
+    padding: 40px;
+    gap: 40px;
+  }
+  
+  .left-panel {
+    flex: 0 0 480px;
+  }
+  
+  .center-stage {
+    flex: 1;
+    min-width: 0;
+    max-width: 1400px;
+  }
+  
+  .right-panel {
+    flex: 0 0 480px;
+  }
+  
+  .main-title {
+    font-size: 64px;
+  }
+  
+  .wheel-container {
+    max-height: 800px;
+  }
+}
+
+/* === ШИРОКИЕ МОНИТОРЫ (2560px - 3440px) === */
+@media (min-width: 2560px) and (max-width: 3439px) {
+  .main-container {
+    max-width: 2400px;
+    margin: 0 auto;
+    padding: 35px;
+    gap: 35px;
+  }
+  
+  .left-panel {
+    flex: 0 0 420px;
+  }
+  
+  .center-stage {
+    flex: 1;
+    min-width: 0;
+    max-width: 1200px;
+  }
+  
+  .right-panel {
+    flex: 0 0 420px;
+  }
+  
+  .main-title {
+    font-size: 56px;
+  }
+  
+  .wheel-container {
+    max-height: 700px;
+  }
+}
+
+/* === СТАНДАРТНЫЕ ШИРОКИЕ (1920px - 2560px) === */
+@media (min-width: 1920px) and (max-width: 2559px) {
+  .main-container {
+    max-width: 1800px;
+    margin: 0 auto;
+    padding: 30px;
+    gap: 30px;
+  }
+  
+  .left-panel {
+    flex: 0 0 380px;
+  }
+  
+  .center-stage {
+    flex: 1;
+    min-width: 0;
+    max-width: 1000px;
+  }
+  
+  .right-panel {
+    flex: 0 0 380px;
+  }
+  
+  .main-title {
+    font-size: 52px;
+  }
+  
+  .wheel-container {
+    max-height: 650px;
+  }
+}
+
+/* === ДЕСКТОПЫ (1600px - 1920px) === */
+@media (min-width: 1600px) and (max-width: 1919px) {
+  .main-container {
+    max-width: 1560px;
+    margin: 0 auto;
+    padding: 25px;
+    gap: 25px;
+  }
+  
+  .left-panel {
+    flex: 0 0 340px;
+  }
+  
+  .center-stage {
+    flex: 1;
+    min-width: 0;
+    max-width: 850px;
+  }
+  
+  .right-panel {
+    flex: 0 0 340px;
+  }
+  
+  .main-title {
+    font-size: 48px;
+  }
+  
+  .wheel-container {
+    max-height: 600px;
+  }
+}
+
+/* === НОУТБУКИ СРЕДНИЕ (1440px - 1600px) === */
+@media (min-width: 1440px) and (max-width: 1599px) {
+  .main-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 22px;
+    gap: 22px;
+  }
+  
+  .left-panel {
+    flex: 0 0 320px;
+  }
+  
+  .center-stage {
+    flex: 1;
+    min-width: 0;
+    max-width: 750px;
+  }
+  
+  .right-panel {
+    flex: 0 0 320px;
+  }
+  
+  .main-title {
+    font-size: 44px;
+  }
+  
+  .wheel-container {
+    max-height: 550px;
+  }
+}
+
+/* === НОУТБУКИ (1200px - 1440px) === */
+@media (min-width: 1200px) and (max-width: 1439px) {
+  .main-container {
+    max-width: 100%;
+    padding: 20px;
+    gap: 20px;
+  }
+  
+  .left-panel {
+    flex: 0 0 280px;
+  }
+  
+  .center-stage {
+    flex: 1;
+    min-width: 0;
+  }
+  
+  .right-panel {
+    flex: 0 0 300px;
+  }
+  
+  .main-title {
+    font-size: 40px;
+  }
+  
+  .wheel-container {
+    max-height: 500px;
+  }
+}
+
+/* === МАЛЕНЬКИЕ НОУТБУКИ (1024px - 1200px) === */
+@media (min-width: 1024px) and (max-width: 1199px) {
+  .main-container {
+    max-width: 100%;
+    padding: 18px;
+    gap: 18px;
+  }
+  
+  .left-panel {
+    display: none; /* Скрываем левую панель */
+  }
+  
+  .center-stage {
+    flex: 1;
+    min-width: 0;
+  }
+  
+  .right-panel {
+    flex: 0 0 320px;
+  }
+  
+  .main-title {
+    font-size: 36px;
+  }
+  
+  .wheel-container {
+    max-height: 480px;
+  }
+}
+
+/* === ПЛАНШЕТЫ ГОРИЗОНТАЛЬНО (900px - 1024px) === */
+@media (min-width: 900px) and (max-width: 1023px) {
+  .main-container {
+    max-width: 100%;
+    padding: 18px;
+    gap: 18px;
+  }
+  
+  .left-panel {
+    display: none;
+  }
+  
+  .center-stage {
+    flex: 1;
+    min-width: 0;
+  }
+  
+  .right-panel {
+    flex: 0 0 300px;
+  }
+  
+  .wheel-container {
+    max-height: 450px;
+  }
+}
+
+/* === ПЛАНШЕТЫ (768px - 900px) === */
+@media (min-width: 768px) and (max-width: 899px) {
+  .main-container {
+    flex-direction: column;
+    padding: 20px;
+    gap: 25px;
+    max-width: 100%;
+  }
+  
+  .left-panel {
+    display: none;
+  }
+  
+  .center-stage {
+    width: 100%;
+    order: 1;
+  }
+  
+  .right-panel {
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+    order: 2;
+  }
+  
+  .wheel-container {
+    max-height: 500px;
+    height: 55vh;
+  }
+  
+  .main-title {
+    font-size: 36px;
+  }
+}
+
+/* === МОБИЛЬНЫЕ БОЛЬШИЕ (600px - 768px) === */
+@media (min-width: 600px) and (max-width: 767px) {
+  .main-container {
+    flex-direction: column;
+    padding: 18px;
+    gap: 22px;
+    max-width: 100%;
+  }
+  
+  .left-panel {
+    display: none;
+  }
+  
+  .center-stage {
+    width: 100%;
+    order: 1;
+  }
+  
+  .right-panel {
+    width: 100%;
+    order: 2;
+  }
+  
+  .wheel-container {
+    max-height: 450px;
+    height: 50vh;
+  }
+  
+  .main-title {
+    font-size: 32px;
+  }
+  
+  .btn-spin {
+    padding: 16px 50px;
+    font-size: 15px;
+  }
+}
+
+/* === МОБИЛЬНЫЕ СРЕДНИЕ (480px - 600px) === */
+@media (min-width: 480px) and (max-width: 599px) {
+  .main-container {
+    flex-direction: column;
+    padding: 15px;
+    gap: 20px;
+    max-width: 100%;
+  }
+  
+  .left-panel {
+    display: none;
+  }
+  
+  .center-stage {
+    width: 100%;
+    order: 1;
+  }
+  
+  .right-panel {
+    width: 100%;
+    order: 2;
+  }
+  
+  .wheel-container {
+    max-height: 400px;
+    height: 48vh;
+  }
+  
+  .main-title {
+    font-size: 28px;
+  }
+  
+  .btn-spin {
+    padding: 15px 45px;
+    font-size: 14px;
+  }
+}
+
+/* === МОБИЛЬНЫЕ МАЛЕНЬКИЕ (до 480px) === */
+@media (max-width: 479px) {
+  .main-container {
+    flex-direction: column;
+    padding: 12px;
+    gap: 18px;
+    max-width: 100%;
+  }
+  
+  .left-panel {
+    display: none;
+  }
+  
+  .center-stage {
+    width: 100%;
+    order: 1;
+  }
+  
+  .right-panel {
+    width: 100%;
+    order: 2;
+  }
+  
+  .wheel-container {
+    max-height: 350px;
+    height: 45vh;
+  }
+  
+  .main-title {
+    font-size: 24px;
+  }
+  
+  .btn-spin {
+    padding: 14px 40px;
+    font-size: 13px;
+  }
+}
+
+/* === ЭКСТРА МАЛЕНЬКИЕ ЭКРАНЫ (до 360px) === */
+@media (max-width: 359px) {
+  .main-container {
+    padding: 10px;
+    gap: 15px;
+  }
+  
+  .wheel-container {
+    max-height: 300px;
+    height: 42vh;
+  }
+  
+  .main-title {
+    font-size: 22px;
+  }
+  
+  .btn-spin {
+    padding: 12px 35px;
+    font-size: 12px;
+  }
+}
+
+/* === КОРРЕКТИРОВКА ПОД ВЫСОТУ ЭКРАНА === */
+@media (max-height: 800px) {
+  .wheel-container {
+    max-height: 350px !important;
+    height: 50vh !important;
+  }
+}
+
+@media (max-height: 700px) {
+  .wheel-container {
+    max-height: 320px !important;
+    height: 48vh !important;
+  }
+  
+  .main-container {
+    padding: 15px;
+    gap: 15px;
+  }
+}
+
+@media (max-height: 600px) {
+  .wheel-container {
+    max-height: 280px !important;
+    height: 45vh !important;
+  }
+  
+  .main-container {
+    padding: 12px;
+    gap: 12px;
+  }
+  
+  .main-title {
+    font-size: 28px !important;
+  }
+}
+
+@media (max-height: 500px) {
+  .wheel-container {
+    max-height: 240px !important;
+    height: 42vh !important;
+  }
+  
+  .main-container {
+    padding: 10px;
+    gap: 10px;
+  }
+  
+  .main-title {
+    font-size: 24px !important;
+  }
+  
+  .btn-spin {
+    padding: 10px 30px !important;
+    font-size: 12px !important;
+  }
+}
+
+/* === ОРИЕНТАЦИЯ УСТРОЙСТВА === */
+@media (orientation: landscape) and (max-width: 900px) and (max-height: 600px) {
+  .wheel-container {
+    max-height: 70vh !important;
+  }
+  
+  .main-container {
+    flex-direction: row;
+    gap: 15px;
+  }
+  
+  .center-stage {
+    flex: 1;
+    order: 1;
+  }
+  
+  .right-panel {
+    flex: 0 0 320px;
+    order: 2;
+  }
+}
+
+/* === ГИБКИЕ РАЗМЕРЫ ТИПОГРАФИКИ === */
+html {
+  font-size: 16px;
+}
+
+@media (min-width: 320px) {
+  html {
+    font-size: calc(14px + (18 - 14) * ((100vw - 320px) / (2560 - 320)));
+  }
+}
+
+@media (min-width: 2560px) {
+  html {
+    font-size: 20px;
+  }
+}
+
+/* === ОПТИМИЗАЦИЯ ДЛЯ RETINA ДИСПЛЕЕВ === */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+  .wheel-container {
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: crisp-edges;
+  }
+}
+
+/* === ПРИНУДИТЕЛЬНЫЙ ЦЕНТР ДЛЯ ОЧЕНЬ ШИРОКИХ ЭКРАНОВ === */
+@media (min-width: 3840px) {
+  .main-container {
+    max-width: 3000px;
+    padding: 50px;
+  }
+  
+  .center-stage {
+    max-width: 1600px;
+  }
+}

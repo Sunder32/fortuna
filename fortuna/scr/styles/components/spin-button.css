@@ -1,0 +1,143 @@
+.btn-spin {
+  padding: 16px 55px;
+  background: 
+    /* Текстура металла */
+    linear-gradient(180deg, rgba(255, 255, 255, 0.15) 0%, transparent 50%, rgba(0, 0, 0, 0.2) 100%),
+    /* Основной огненный градиент */
+    linear-gradient(135deg, #ffaa44 0%, #ff7733 50%, #dd4422 100%);
+  border: 2px solid rgba(255, 150, 80, 0.8);
+  border-radius: 50px;
+  font-family: 'Cinzel', serif;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #1a0500;
+  text-shadow: 
+    0 1px 2px rgba(255, 255, 255, 0.4),
+    0 -1px 1px rgba(0, 0, 0, 0.8);
+  cursor: pointer;
+  position: relative;
+  box-shadow: 
+    /* Внешнее свечение */
+    0 0 30px rgba(255, 120, 50, 0.6),
+    0 12px 45px rgba(255, 80, 30, 0.5),
+    /* Внутренний блеск */
+    inset 0 1px 1px rgba(255, 255, 255, 0.3),
+    inset 0 -3px 12px rgba(160, 30, 0, 0.5),
+    /* Тлеющий край */
+    inset 0 0 0 1px rgba(255, 180, 100, 0.3);
+  transition: all 0.3s ease;
+  white-space: nowrap;
+  animation: buttonBreathe 3s ease-in-out infinite;
+}
+
+@keyframes buttonBreathe {
+  0%, 100% {
+    box-shadow: 
+      0 0 30px rgba(255, 120, 50, 0.5),
+      0 12px 45px rgba(255, 80, 30, 0.4),
+      inset 0 1px 1px rgba(255, 255, 255, 0.3),
+      inset 0 -3px 12px rgba(160, 30, 0, 0.5),
+      inset 0 0 0 1px rgba(255, 180, 100, 0.3);
+  }
+  50% {
+    box-shadow: 
+      0 0 40px rgba(255, 120, 50, 0.7),
+      0 12px 50px rgba(255, 80, 30, 0.6),
+      inset 0 1px 1px rgba(255, 255, 255, 0.4),
+      inset 0 -3px 12px rgba(160, 30, 0, 0.6),
+      inset 0 0 0 1px rgba(255, 180, 100, 0.5);
+  }
+}
+
+.btn-spin::before {
+  content: '';
+  position: absolute;
+  inset: -3px;
+  background: linear-gradient(135deg, 
+    rgba(255, 200, 120, 0.8), 
+    rgba(255, 120, 60, 0.8));
+  border-radius: 50px;
+  z-index: -1;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  filter: blur(8px);
+}
+
+.btn-spin:hover::before {
+  opacity: 1;
+  animation: haloGlow 1.5s ease-in-out infinite;
+}
+
+@keyframes haloGlow {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 0.6;
+  }
+  50% {
+    transform: scale(1.1);
+    opacity: 0.9;
+  }
+}
+
+.btn-spin:hover {
+  transform: translateY(-3px) scale(1.02);
+  border-color: rgba(255, 200, 120, 1);
+  box-shadow: 
+    0 0 50px rgba(255, 140, 60, 0.9),
+    0 18px 60px rgba(255, 100, 40, 0.7),
+    inset 0 1px 2px rgba(255, 255, 255, 0.5),
+    inset 0 -3px 15px rgba(180, 40, 0, 0.6),
+    inset 0 0 0 1px rgba(255, 200, 120, 0.5);
+}
+
+.btn-spin:active {
+  transform: translateY(0);
+}
+
+/* Touch feedback для мобильных */
+@media (hover: none) and (pointer: coarse) {
+  .btn-spin:active {
+    transform: scale(0.95);
+    background: linear-gradient(135deg, #ffaa66 0%, #ff7744 100%);
+    transition: all 0.1s ease;
+  }
+}
+
+.btn-spin:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+.btn-spin.spinning {
+  animation: pulseGlow 1s ease-in-out infinite;
+  box-shadow: 
+    0 0 60px rgba(255, 100, 40, 0.8),
+    inset 0 0 40px rgba(255, 180, 100, 0.4);
+}
+
+@keyframes pulseGlow {
+  0%, 100% { opacity: 0.5; }
+  50% { opacity: 1; }
+}
+
+.keyboard-hint {
+  font-size: 11px;
+  color: #8b6f47;
+  text-align: center;
+  margin-top: -10px;
+  margin-bottom: 10px;
+  opacity: 0.8;
+  font-family: 'Playfair Display', serif;
+  font-style: italic;
+  letter-spacing: 0.05em;
+  animation: hintPulse 3s ease-in-out infinite;
+}
+
+@keyframes hintPulse {
+  0%, 100% { opacity: 0.6; }
+  50% { opacity: 1; }
+}

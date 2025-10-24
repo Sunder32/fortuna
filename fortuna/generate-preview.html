@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Генератор Preview.jpg</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 20px;
+            font-family: Arial, sans-serif;
+            background: #1a1a1a;
+            color: #fff;
+        }
+        
+        #canvas {
+            border: 2px solid #333;
+            display: block;
+            margin: 20px auto;
+        }
+        
+        .controls {
+            text-align: center;
+            margin: 20px;
+        }
+        
+        button {
+            padding: 12px 24px;
+            font-size: 16px;
+            background: #ff6b45;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            margin: 0 10px;
+        }
+        
+        button:hover {
+            background: #ff8844;
+        }
+        
+        .instructions {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background: #2a2a2a;
+            border-radius: 8px;
+        }
+        
+        code {
+            background: #1a1a1a;
+            padding: 2px 6px;
+            border-radius: 3px;
+            color: #ff6b45;
+        }
+    </style>
+</head>
+<body>
+    <h1 style="text-align: center;">🎨 Генератор Preview.jpg для Open Graph</h1>
+    
+    <div class="instructions">
+        <h2>📋 Инструкция:</h2>
+        <ol>
+            <li>Нажмите <strong>"Сгенерировать превью"</strong></li>
+            <li>Нажмите <strong>"Скачать preview.jpg"</strong></li>
+            <li>Сохраните файл в <code>d:\koleso\assets\img\preview.jpg</code></li>
+            <li>Обновите <code>index.html</code> с новым путём к изображению</li>
+        </ol>
+        <p><strong>Размер:</strong> 1200×630px (стандарт Open Graph)</p>
+        <p><strong>Качество:</strong> 0.9 (высокое качество JPEG)</p>
+    </div>
+    
+    <canvas id="canvas" width="1200" height="630"></canvas>
+    
+    <div class="controls">
+        <button onclick="generatePreview()">🎨 Сгенерировать превью</button>
+        <button onclick="downloadImage()">💾 Скачать preview.jpg</button>
+    </div>
+    
+    <script>
+        const canvas = document.getElementById('canvas');
+        const ctx = canvas.getContext('2d');
+        
+        function generatePreview() {
+            const width = 1200;
+            const height = 630;
+            const centerX = width / 2;
+            const centerY = height / 2;
+            
+            // Фон - радиальный градиент
+            const bgGradient = ctx.createRadialGradient(centerX, centerY, 0, centerX, centerY, 500);
+            bgGradient.addColorStop(0, '#2a0a0a');
+            bgGradient.addColorStop(1, '#0a0101');
+            ctx.fillStyle = bgGradient;
+            ctx.fillRect(0, 0, width, height);
+            
+            // Декоративные круги
+            drawGlowCircle(centerX, centerY, 250, '#ff6b45', 3, 0.3);
+            drawGlowCircle(centerX, centerY, 200, '#ff8844', 2, 0.5);
+            drawGlowCircle(centerX, centerY, 150, '#ffaa66', 1, 0.7);
+            
+            // Колесо
+            drawWheel(centerX, centerY, 140);
+            
+            // Указатель
+            ctx.save();
+            ctx.translate(centerX, 50);
+            ctx.fillStyle = '#ffc99d';
+            ctx.shadowColor = '#ff6b45';
+            ctx.shadowBlur = 15;
+            ctx.beginPath();
+            ctx.moveTo(-15, 0);
+            ctx.lineTo(15, 0);
+            ctx.lineTo(0, 30);
+            ctx.closePath();
+            ctx.fill();
+            ctx.restore();
+            
+            // Текст - заголовок
+            ctx.save();
+            ctx.shadowColor = '#ff6b45';
+            ctx.shadowBlur = 20;
+            ctx.font = 'bold 72px Arial, sans-serif';
+            ctx.fillStyle = '#ff6b45';
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'middle';
+            ctx.fillText('🔥 АДСКОЕ КОЛЕСО СУДЬБЫ', centerX, 520);
+            ctx.restore();
+            
+            // Подзаголовок
+            ctx.font = '28px Arial, sans-serif';
+            ctx.fillStyle = '#ffaa66';
+            ctx.textAlign = 'center';
+            ctx.fillText('Запусти механизм преисподней и узри свою судьбу', centerX, 570);
+            
+            // Декоративные искры
+            drawSpark(150, 100, 3, '#ff8844', 0.8);
+            drawSpark(1050, 150, 4, '#ff6b45', 0.6);
+            drawSpark(200, 500, 2, '#ffaa66', 0.7);
+            drawSpark(1000, 550, 3, '#ff7844', 0.5);
+            
+            console.log('✅ Превью сгенерировано!');
+        }
+        
+        function drawGlowCircle(x, y, radius, color, lineWidth, opacity) {
+            ctx.save();
+            ctx.strokeStyle = color;
+            ctx.lineWidth = lineWidth;
+            ctx.globalAlpha = opacity;
+            ctx.beginPath();
+            ctx.arc(x, y, radius, 0, Math.PI * 2);
+            ctx.stroke();
+            ctx.restore();
+        }
+        
+        function drawWheel(centerX, centerY, radius) {
+            const colors = [
+                '#ff6b45', '#d9443f', '#ff8938', '#c53030',
+                '#ffa250', '#d33234', '#ff7844', '#e14b3a'
+            ];
+            
+            const sectorCount = 8;
+            const angleStep = (Math.PI * 2) / sectorCount;
+            
+            ctx.save();
+            ctx.translate(centerX, centerY);
+            
+            // Рисуем секторы
+            for (let i = 0; i < sectorCount; i++) {
+                ctx.save();
+                ctx.rotate(i * angleStep);
+                
+                ctx.fillStyle = colors[i];
+                ctx.globalAlpha = 0.8;
+                ctx.beginPath();
+                ctx.moveTo(0, 0);
+                ctx.arc(0, 0, radius, -angleStep / 2, angleStep / 2);
+                ctx.closePath();
+                ctx.fill();
+                
+                ctx.restore();
+            }
+            
+            // Внешняя граница колеса
+            ctx.strokeStyle = '#ffc99d';
+            ctx.lineWidth = 4;
+            ctx.shadowColor = '#ff6b45';
+            ctx.shadowBlur = 15;
+            ctx.beginPath();
+            ctx.arc(0, 0, radius, 0, Math.PI * 2);
+            ctx.stroke();
+            
+            // Внутренний круг
+            ctx.fillStyle = '#1a0505';
+            ctx.beginPath();
+            ctx.arc(0, 0, 50, 0, Math.PI * 2);
+            ctx.fill();
+            
+            ctx.strokeStyle = '#ff6b45';
+            ctx.lineWidth = 2;
+            ctx.shadowBlur = 10;
+            ctx.stroke();
+            
+            ctx.restore();
+        }
+        
+        function drawSpark(x, y, radius, color, opacity) {
+            ctx.save();
+            ctx.fillStyle = color;
+            ctx.globalAlpha = opacity;
+            ctx.shadowColor = color;
+            ctx.shadowBlur = 10;
+            ctx.beginPath();
+            ctx.arc(x, y, radius, 0, Math.PI * 2);
+            ctx.fill();
+            ctx.restore();
+        }
+        
+        function downloadImage() {
+            canvas.toBlob(function(blob) {
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = 'preview.jpg';
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+                URL.revokeObjectURL(url);
+                console.log('✅ Файл preview.jpg скачан!');
+            }, 'image/jpeg', 0.9);
+        }
+        
+        // Автоматически генерируем при загрузке
+        window.addEventListener('load', generatePreview);
+    </script>
+</body>
+</html>

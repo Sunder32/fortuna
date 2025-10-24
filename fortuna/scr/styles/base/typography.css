@@ -1,0 +1,45 @@
+/* 📖 ИМПОРТ ШРИФТОВ */
+@import url('https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700;900&display=swap');
+
+.main-title, .book-main-title, .result-value, .btn-spin, .btn, .protocol-title, .book-title, .input-label, .sectors-header, .sound-toggle .toggle-label {
+  font-family: 'Cinzel', serif;
+  letter-spacing: 0.08em;
+  font-weight: 700;
+}
+
+.subtitle, .feature-item, .protocol-list li, .book-description, .sector-input, .sector-title, .footer-note, .footer-warning, .footer-hint {
+  font-family: 'IM Fell English', serif; /* Книжный стиль */
+  font-weight: 400;
+}
+
+.main-title {
+  font-size: 38px;
+  line-height: 1.15;
+  font-weight: 800;
+  color: #ffcc88;
+  text-shadow: 
+    0 0 20px rgba(255, 120, 40, 0.9),
+    0 2px 8px rgba(0, 0, 0, 0.95);
+  margin-bottom: 12px;
+  letter-spacing: 0.02em;
+}
+
+.main-title .accent {
+  display: block;
+  font-size: 38px;
+  font-weight: 900;
+  color: #ff8844;
+  text-shadow: 
+    0 0 25px rgba(255, 80, 30, 0.95),
+    0 3px 10px rgba(0, 0, 0, 1);
+}
+
+.subtitle {
+  font-size: 15px;
+  color: #d4c4b0;
+  line-height: 1.6;
+  margin-top: 15px;
+  opacity: 1;
+  font-weight: 400;
+}

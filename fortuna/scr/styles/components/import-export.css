@@ -1,0 +1,244 @@
+.import-export-section {
+  display: flex;
+  gap: 12px;
+  margin-top: 15px;
+  flex-shrink: 0;
+}
+
+.btn-export,
+.btn-import {
+  flex: 1;
+  padding: 14px 20px;
+  font-size: 13px;
+  font-weight: 700;
+  font-family: 'Cinzel', serif;
+  border: 2px solid #8b5a3c;
+  background: linear-gradient(135deg, rgba(139, 90, 60, 0.15) 0%, rgba(80, 45, 25, 0.25) 100%);
+  color: #ff8844;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 
+    0 2px 8px rgba(0, 0, 0, 0.4),
+    inset 0 1px 0 rgba(255, 136, 68, 0.1),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.4);
+}
+
+.btn-export::before,
+.btn-import::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 136, 68, 0.2), transparent);
+  transition: left 0.5s ease;
+}
+
+.btn-export:hover::before,
+.btn-import:hover::before {
+  left: 100%;
+}
+
+.btn-export:hover,
+.btn-import:hover {
+  background: linear-gradient(135deg, rgba(255, 107, 69, 0.3) 0%, rgba(217, 68, 63, 0.35) 100%);
+  border-color: #ff8844;
+  color: #ffcc88;
+  transform: translateY(-3px);
+  box-shadow: 
+    0 6px 20px rgba(255, 107, 69, 0.4),
+    0 0 30px rgba(255, 136, 68, 0.2),
+    inset 0 1px 0 rgba(255, 200, 136, 0.2),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.5);
+}
+
+.btn-export:active,
+.btn-import:active {
+  transform: translateY(-1px);
+  box-shadow: 
+    0 2px 10px rgba(255, 107, 69, 0.3),
+    inset 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+#importFile {
+  display: none;
+}
+
+.export-menu {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 10000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.export-menu-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.8);
+  -webkit-backdrop-filter: blur(4px);
+  backdrop-filter: blur(4px);
+}
+
+.export-menu-content {
+  position: relative;
+  background: linear-gradient(135deg, rgba(30, 15, 10, 0.98) 0%, rgba(20, 8, 8, 0.98) 100%);
+  border: 2px solid #8b5a3c;
+  border-radius: 20px;
+  padding: 35px;
+  max-width: 520px;
+  width: 90%;
+  box-shadow: 
+    0 20px 60px rgba(0, 0, 0, 0.8),
+    0 0 80px rgba(255, 107, 69, 0.2),
+    inset 0 1px 0 rgba(255, 136, 68, 0.15),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.5);
+  animation: exportMenuSlide 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+@keyframes exportMenuSlide {
+  from {
+    opacity: 0;
+    transform: translateY(-30px) scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.export-menu-content h3 {
+  margin: 0 0 8px 0;
+  font-family: 'Cinzel', serif;
+  font-size: 26px;
+  font-weight: 700;
+  color: #ffcc88;
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  text-shadow: 
+    0 2px 10px rgba(255, 107, 69, 0.5),
+    0 0 20px rgba(255, 136, 68, 0.3);
+}
+
+.export-menu-content p {
+  margin: 0 0 25px 0;
+  color: #b8956f;
+  text-align: center;
+  font-size: 14px;
+  font-family: 'Playfair Display', serif;
+  letter-spacing: 0.5px;
+}
+
+.export-buttons {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 14px;
+  margin-bottom: 25px;
+}
+
+.export-buttons button {
+  padding: 16px 22px;
+  font-size: 15px;
+  font-weight: 700;
+  font-family: 'Cinzel', serif;
+  border: 2px solid rgba(139, 90, 60, 0.5);
+  background: linear-gradient(135deg, rgba(20, 8, 8, 0.6) 0%, rgba(30, 15, 10, 0.6) 100%);
+  color: #ffcc88;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 
+    0 2px 8px rgba(0, 0, 0, 0.4),
+    inset 0 1px 0 rgba(255, 136, 68, 0.1);
+}
+
+.export-buttons button::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  background: rgba(255, 136, 68, 0.2);
+  transform: translate(-50%, -50%);
+  transition: width 0.5s ease, height 0.5s ease;
+}
+
+.export-buttons button:hover::before {
+  width: 300px;
+  height: 300px;
+}
+
+.export-buttons button:hover {
+  background: linear-gradient(135deg, rgba(255, 107, 69, 0.3) 0%, rgba(217, 68, 63, 0.3) 100%);
+  border-color: #ff8844;
+  color: #fff;
+  transform: translateY(-3px);
+  box-shadow: 
+    0 6px 20px rgba(255, 107, 69, 0.4),
+    0 0 30px rgba(255, 136, 68, 0.2),
+    inset 0 1px 0 rgba(255, 200, 136, 0.2);
+}
+
+.export-buttons button:active {
+  transform: translateY(-1px);
+  box-shadow: 
+    0 2px 10px rgba(255, 107, 69, 0.3),
+    inset 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.export-close {
+  width: 100%;
+  padding: 14px;
+  font-size: 14px;
+  font-weight: 700;
+  font-family: 'Cinzel', serif;
+  border: 2px solid rgba(139, 90, 60, 0.4);
+  background: transparent;
+  color: #8b6f47;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 1.2px;
+}
+
+.export-close:hover {
+  background: rgba(20, 8, 8, 0.5);
+  border-color: #8b6f47;
+  color: #ffcc88;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+@media (max-width: 768px) {
+  .export-buttons {
+    grid-template-columns: 1fr;
+  }
+  
+  .import-export-section {
+    flex-direction: column;
+  }
+}

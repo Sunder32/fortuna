@@ -1,0 +1,128 @@
+.sound-controls {
+  display: flex;
+  gap: 25px;
+  flex-wrap: nowrap;
+  justify-content: center;
+  align-items: center;
+}
+
+.sound-toggle {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  font-family: 'Cinzel', serif;
+  font-size: 10px;
+  color: #c4b4a4;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  transition: color 0.3s ease;
+  white-space: nowrap;
+}
+
+.sound-toggle:hover {
+  color: #ffcc88;
+}
+
+.sound-toggle input {
+  display: none;
+}
+
+.toggle-visual {
+  width: 36px;
+  height: 18px;
+  background: rgba(30, 10, 10, 0.8);
+  border: 1px solid rgba(255, 120, 60, 0.3);
+  border-radius: 20px;
+  position: relative;
+  transition: all 0.3s ease;
+  flex-shrink: 0;
+}
+
+.toggle-visual::after {
+  content: '';
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 12px;
+  height: 12px;
+  background: #8b6f47;
+  border-radius: 50%;
+  transition: all 0.3s ease;
+}
+
+.sound-toggle input:checked + .toggle-visual {
+  background: rgba(255, 120, 60, 0.2);
+  border-color: #ff8844;
+}
+
+.sound-toggle input:checked + .toggle-visual::after {
+  left: 20px;
+  background: #ff8844;
+  box-shadow: 0 0 10px rgba(255, 120, 60, 0.6);
+}
+
+.sound-toggle input:disabled + .toggle-visual {
+  opacity: 0.4;
+  cursor: not-allowed;
+  border-color: rgba(255, 120, 60, 0.15);
+}
+
+.sound-toggle input:disabled ~ .toggle-label {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.sound-toggle:has(input:disabled) {
+  pointer-events: none;
+  opacity: 0.5;
+}
+
+/* 🌀 РЕЖИМ ХАОСА - особая стилизация */
+.sound-toggle.chaos-mode {
+  position: relative;
+}
+
+.sound-toggle.chaos-mode .toggle-label {
+  font-weight: 600;
+  background: linear-gradient(90deg, #ff4422, #cc3311, #ff6633, #ff4422);
+  background-size: 200% 100%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: chaosGradient 3s linear infinite;
+}
+
+@keyframes chaosGradient {
+  0% { background-position: 0% 50%; }
+  100% { background-position: 200% 50%; }
+}
+
+.sound-toggle.chaos-mode input:checked + .toggle-visual {
+  background: rgba(255, 40, 20, 0.3);
+  border-color: #ff4422;
+  box-shadow: 0 0 15px rgba(255, 40, 20, 0.5);
+  animation: chaosGlow 2s ease-in-out infinite;
+}
+
+@keyframes chaosGlow {
+  0%, 100% { 
+    box-shadow: 0 0 15px rgba(255, 40, 20, 0.5);
+    border-color: #ff4422;
+  }
+  50% { 
+    box-shadow: 0 0 25px rgba(255, 40, 20, 0.8);
+    border-color: #ff6633;
+  }
+}
+
+.sound-toggle.chaos-mode input:checked + .toggle-visual::after {
+  background: linear-gradient(135deg, #ff4422, #cc3311);
+  box-shadow: 0 0 15px rgba(255, 40, 20, 0.8);
+  animation: chaosSpin 1s linear infinite;
+}
+
+@keyframes chaosSpin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
