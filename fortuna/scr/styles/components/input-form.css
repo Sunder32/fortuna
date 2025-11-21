@@ -1,167 +1,131 @@
 .input-section {
-  margin: 18px 0;
+  margin: 10px 0;
   flex-shrink: 0;
+  position: relative;
 }
 
 .input-label {
-  font-size: 10px;
+  font-family: 'Cinzel', serif;
+  font-size: 12px;
   text-transform: uppercase;
-  letter-spacing: 0.18em;
-  color: #8b6f47;
-  margin-bottom: 10px;
+  letter-spacing: 0.15em;
+  color: #ffcc88; /* Золотистый цвет вместо коричневого */
+  margin-bottom: 8px;
   display: block;
+  font-weight: 700;
+  text-shadow: 0 0 10px rgba(255, 107, 69, 0.4);
+  padding-left: 4px;
+  border-left: 2px solid #ff6b45;
+  line-height: 1;
 }
 
 .sector-input {
   width: 100%;
-  padding: 11px 14px;
-  background: rgba(15, 6, 6, 0.95);
-  border: 2px solid rgba(255, 120, 60, 0.4);
-  border-radius: 12px;
+  padding: 12px 15px;
+  /* Темный полупрозрачный фон */
+  background: rgba(10, 4, 4, 0.8);
+  /* Огненная граница */
+  border: 1px solid rgba(255, 107, 69, 0.3);
+  border-radius: 10px;
+  /* Светлый текст */
   color: #ffe8d3;
-  font-size: 14px;
+  font-family: 'IM Fell English', serif; /* Книжный шрифт */
+  font-size: 15px;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   font-weight: 400;
   resize: vertical;
-  min-height: 60px;
-  max-height: 300px;
+  min-height: 80px; /* Чуть выше */
+  max-height: 200px;
   line-height: 1.5;
-}
-
-.sector-input.drag-over {
-  background: rgba(255, 136, 68, 0.15);
-  border-color: #ff8844;
-  box-shadow: 
-    0 0 30px rgba(255, 136, 68, 0.5),
-    0 0 60px rgba(255, 107, 69, 0.3),
-    inset 0 0 20px rgba(255, 120, 60, 0.2);
-  animation: dragPulseInput 0.6s ease-in-out infinite;
-}
-
-@keyframes dragPulseInput {
-  0%, 100% {
-    transform: scale(1);
-    border-color: #ff8844;
-  }
-  50% {
-    transform: scale(1.01);
-    border-color: #ffaa66;
-  }
+  box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.5);
 }
 
 .sector-input:focus {
   outline: none;
   border-color: #ff8844;
+  background: rgba(15, 5, 5, 0.9);
   box-shadow: 
-    0 0 30px rgba(255, 120, 60, 0.2),
-    inset 0 0 20px rgba(255, 120, 60, 0.05);
-  background: rgba(12, 4, 4, 0.95);
+    0 0 15px rgba(255, 107, 69, 0.2),
+    inset 0 2px 8px rgba(0, 0, 0, 0.6);
 }
 
 .sector-input::placeholder {
-  color: #8a7a6a;
-  font-style: normal;
-  line-height: 1.4;
+  color: rgba(180, 140, 120, 0.5);
+  font-style: italic;
+  font-size: 13px;
 }
 
-.sector-input:disabled {
-  opacity: 0.5;
-  cursor: not-allowed;
-}
-
+/* Scrollbar styling for textarea */
 .sector-input::-webkit-scrollbar {
-  width: 8px;
+  width: 6px;
 }
-
 .sector-input::-webkit-scrollbar-track {
-  background: rgba(15, 6, 6, 0.8);
-  border-radius: 8px;
+  background: transparent;
 }
-
 .sector-input::-webkit-scrollbar-thumb {
-  background: linear-gradient(180deg, #ff6b45 0%, #d9443f 100%);
-  border-radius: 8px;
-  border: 1px solid rgba(15, 6, 6, 0.5);
+  background: rgba(255, 107, 69, 0.3);
+  border-radius: 3px;
 }
 
+/* Action Buttons Section */
 .action-buttons {
   display: flex;
-  gap: 10px;
-  margin-top: 15px;
+  gap: 8px;
+  margin-top: 10px;
   flex-shrink: 0;
 }
 
 .btn {
-  padding: 12px 22px;
+  padding: 10px 16px;
   border: none;
-  border-radius: 30px;
-  font-size: 12px;
+  border-radius: 8px; /* Более строгие углы */
+  font-size: 11px;
   font-weight: 700;
+  font-family: 'Cinzel', serif;
   letter-spacing: 0.08em;
   text-transform: uppercase;
   cursor: pointer;
   transition: all 0.3s ease;
+  min-height: 36px;
 }
 
 .btn-add {
   flex: 1;
   background: linear-gradient(135deg, #ff9955 0%, #ff7733 100%);
-  color: #0a0000;
+  color: #1a0500;
+  border: 1px solid #ffaa66;
   box-shadow: 
-    0 8px 25px rgba(255, 120, 60, 0.4),
-    inset 0 -2px 8px rgba(180, 40, 0, 0.3);
-  font-weight: 700;
+    0 4px 12px rgba(255, 120, 60, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
 }
 
 .btn-add:hover {
   transform: translateY(-2px);
   box-shadow: 
-    0 12px 35px rgba(255, 120, 60, 0.4),
-    inset 0 -2px 8px rgba(180, 40, 0, 0.2);
+    0 6px 18px rgba(255, 120, 60, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.3);
+  filter: brightness(1.1);
 }
 
 .btn-add:active {
   transform: translateY(0);
 }
 
-/* Touch feedback для мобильных */
-@media (hover: none) and (pointer: coarse) {
-  .btn:active {
-    transform: scale(0.95);
-    transition: transform 0.1s ease;
-  }
-  
-  .btn-add:active {
-    background: linear-gradient(135deg, #ffaa66 0%, #ff8844 100%);
-  }
-  
-  .btn-clear:active {
-    background: rgba(255, 120, 60, 0.15);
-    border-color: rgba(255, 120, 60, 0.7);
-  }
-}
-
-.btn-add:disabled {
-  opacity: 0.4;
-  cursor: not-allowed;
-  transform: none;
-  box-shadow: none;
-}
-
 .btn-clear {
-  background: rgba(30, 10, 10, 0.6);
+  background: rgba(20, 5, 5, 0.6);
   color: #ffaa66;
-  border: 2px solid rgba(255, 120, 60, 0.5);
-  padding: 16px 24px;
-  font-weight: 700;
+  border: 1px solid rgba(255, 120, 60, 0.4);
 }
 
 .btn-clear:hover {
-  background: rgba(255, 120, 60, 0.08);
-  border-color: rgba(255, 120, 60, 0.5);
+  background: rgba(255, 120, 60, 0.1);
+  border-color: #ff8844;
+  color: #ffcc88;
 }
 
-.btn-clear:disabled {
-  opacity: 0.4;
+.btn:disabled {
+  opacity: 0.5;
   cursor: not-allowed;
+  transform: none !important;
+  box-shadow: none !important;
 }

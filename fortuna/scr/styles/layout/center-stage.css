@@ -3,64 +3,86 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 0;
+  justify-content: space-between; /* Распределяем пространство */
+  gap: 10px;
   min-width: 0;
   position: relative;
+  height: 100%;
 }
 
 .stage-header {
   position: relative;
-  top: 0;
   z-index: 10;
-  margin-bottom: 20px;
+  flex-shrink: 0; /* Не сжимать заголовок */
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 10px;
 }
 
 .wheel-wrapper {
   width: 100%;
+  flex: 1; /* Занимаем все доступное место */
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-bottom: 25px;
-  -webkit-transform: translateZ(0);
-  transform: translateZ(0);
-  will-change: transform;
+  min-height: 0; /* Важно для Flexbox скролла/сжатия */
+  margin-bottom: 10px;
+  position: relative;
 }
 
 .wheel-container {
   width: 100%;
   max-width: 800px;
-  height: 62vh;
-  max-height: 600px;
-  min-height: 520px;
+  /* Убираем жесткую высоту, используем проценты от родителя или авто */
+  height: 100%; 
+  max-height: 100%;
+  aspect-ratio: 1 / 1; /* Стараемся быть квадратными */
+  min-height: 280px; /* Минимальный размер */
+  
+  border-radius: 50%; /* Круглый контейнер для круга */
+  /* Или прямоугольный с радиусом */
   border-radius: 20px;
+  
   overflow: hidden;
   position: relative;
   background: radial-gradient(ellipse at center, rgba(255, 60, 20, 0.08) 0%, transparent 65%);
   box-shadow: 
     0 0 80px rgba(255, 60, 0, 0.15),
     inset 0 0 80px rgba(0, 0, 0, 0.5);
+    
+  /* Центрируем canvas внутри */
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .wheel-container canvas {
   width: 100% !important;
   height: 100% !important;
+  object-fit: contain; /* Чтобы колесо не плющило */
 }
 
 .controls-wrapper {
+  flex-shrink: 0; /* Не сжимать панель управления */
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 20px;
+  gap: 15px;
   width: 100%;
-  padding: 0 10px;
+  padding: 0 10px 10px 10px;
+  background: linear-gradient(to top, #0a0505 20%, transparent); /* Подложка чтобы читалось */
 }
 
-.wheel-controls {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 20px;
-  margin-top: 20px;
-  position: relative;
-  z-index: 10;
+/* Медиа-запросы для очень плоских экранов */
+@media (max-height: 700px) and (min-width: 900px) {
+  .controls-wrapper {
+    gap: 10px;
+  }
+  .wheel-wrapper {
+    margin-bottom: 5px;
+  }
+  .stage-header {
+    margin-bottom: 5px;
+  }
 }

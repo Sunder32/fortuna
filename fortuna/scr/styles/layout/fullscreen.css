@@ -1,17 +1,20 @@
 /* 
- * FULLSCREEN АДАПТАЦИЯ С НУЛЯ
- * Сайт занимает весь экран без отступов
+ * FULLSCREEN АДАПТАЦИЯ С НУЛЯ (REFACTORED)
+ * Единая Grid-система для всех устройств
  */
 
-/* === БАЗОВАЯ СТРУКТУРА (НА ВЕСЬ ЭКРАН) === */
+/* === БАЗОВАЯ СТРУКТУРА === */
 .main-container {
   width: 100vw;
-  height: 100vh;
+  height: 100vh; /* Fallback */
+  height: 100dvh; /* Dynamic Viewport Height для мобильных браузеров */
   margin: 0;
   padding: 0;
   display: grid;
-  grid-template-columns: 25% 1fr 25%;
-  grid-template-rows: 100vh;
+  /* По умолчанию: десктоп - фиксированные уши, центр резиновый */
+  grid-template-columns: 320px 1fr 320px;
+  grid-template-rows: 1fr;
+  grid-template-areas: "left center right";
   gap: 0;
   position: fixed;
   top: 0;
@@ -21,235 +24,126 @@
   z-index: 2;
   box-sizing: border-box;
   overflow: hidden;
+  background-color: #0a0505;
 }
 
-.left-panel,
-.center-stage,
-.right-panel {
-  height: 100vh;
+.left-panel {
+  grid-area: left;
+  height: 100%;
+  /* Left panel can scroll nicely */
   overflow-y: auto;
   overflow-x: hidden;
   padding: 20px;
   box-sizing: border-box;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 107, 69, 0.3) rgba(0, 0, 0, 0.2);
 }
 
-/* === ДЕСКТОПЫ ШИРОКИЕ (1920px+) === */
-@media (min-width: 1920px) {
+.center-stage {
+  grid-area: center;
+  height: 100%;
+  overflow: hidden; 
+  padding: 20px 10px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.right-panel {
+  grid-area: right;
+  height: 100%;
+  /* ВАЖНО: Правая панель НЕ скроллится сама, скроллится список внутри */
+  overflow: hidden; 
+  padding: 20px;
+  box-sizing: border-box;
+  display: flex; /* Делаем flex container, чтобы record-book растягивался */
+  flex-direction: column;
+}
+
+/* === АДАПТИВНОСТЬ === */
+
+/* 1. Крупный десктоп (>= 1600px) */
+@media (min-width: 1600px) {
   .main-container {
-    grid-template-columns: 380px 1fr 380px;
-  }
-  
-  .left-panel,
-  .right-panel {
-    padding: 25px;
-  }
-  
-  .center-stage {
-    padding: 30px;
+    grid-template-columns: 360px 1fr 360px;
   }
 }
 
-/* === ДЕСКТОПЫ СРЕДНИЕ (1440px - 1920px) === */
-@media (min-width: 1440px) and (max-width: 1919px) {
+/* 2. Стандартный десктоп (1200px - 1599px) */
+@media (min-width: 1200px) and (max-width: 1599px) {
   .main-container {
-    grid-template-columns: 340px 1fr 340px;
+    grid-template-columns: 320px 1fr 300px;
   }
-  
-  .left-panel,
-  .right-panel {
-    padding: 22px;
-  }
-  
-  .center-stage {
-    padding: 25px;
+  .left-panel, .right-panel {
+    padding: 15px;
   }
 }
 
-/* === НОУТБУКИ (1200px - 1440px) === */
-@media (min-width: 1200px) and (max-width: 1439px) {
-  .main-container {
-    grid-template-columns: 300px 1fr 300px;
-  }
-  
-  .left-panel,
-  .right-panel {
-    padding: 20px;
-  }
-  
-  .center-stage {
-    padding: 22px;
-  }
-}
-
-/* === НОУТБУКИ МАЛЕНЬКИЕ (1024px - 1200px) === */
-@media (min-width: 1024px) and (max-width: 1199px) {
+/* 3. Маленький десктоп / Планшет (Горизонтально) (900px - 1199px) */
+@media (min-width: 900px) and (max-width: 1199px) {
   .main-container {
     grid-template-columns: 1fr 320px;
+    grid-template-areas: "center right";
   }
   
   .left-panel {
     display: none;
   }
-  
-  .center-stage,
-  .right-panel {
-    padding: 18px;
-  }
 }
 
-/* === ПЛАНШЕТЫ ГОРИЗОНТАЛЬНО (900px - 1024px) === */
-@media (min-width: 900px) and (max-width: 1023px) {
-  .main-container {
-    grid-template-columns: 1fr 300px;
-  }
-  
-  .left-panel {
-    display: none;
-  }
-  
-  .center-stage,
-  .right-panel {
-    padding: 18px;
-  }
-}
-
-/* === ПЛАНШЕТЫ (768px - 900px) === */
-@media (min-width: 768px) and (max-width: 899px) {
+/* 4. Планшет (Вертикально) / Крупный мобильный (600px - 899px) */
+@media (max-width: 899px) {
   .main-container {
     grid-template-columns: 1fr;
-    grid-template-rows: auto 1fr;
+    grid-template-rows: 1fr auto;
     grid-template-areas:
       "center"
       "right";
+    overflow-y: auto; /* Разрешаем скролл всей страницы */
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    height: auto;
+    min-height: 100dvh;
   }
-  
+
   .left-panel {
     display: none;
   }
-  
+
   .center-stage {
-    grid-area: center;
     height: auto;
     min-height: 60vh;
-    padding: 20px;
+    overflow: visible;
   }
-  
+
   .right-panel {
-    grid-area: right;
     height: auto;
-    padding: 20px;
-  }
-  
-  .wheel-container {
-    max-height: 50vh !important;
+    border-top: 1px solid rgba(255, 107, 69, 0.3);
+    overflow: visible; /* На мобилках разрешаем скролл */
+    display: block; /* Возвращаем блочное поведение на мобилках */
   }
 }
 
-/* === МОБИЛЬНЫЕ (до 768px) === */
-@media (max-width: 767px) {
-  .main-container {
-    grid-template-columns: 1fr;
-    grid-template-rows: auto 1fr;
-    grid-template-areas:
-      "center"
-      "right";
-  }
-  
-  .left-panel {
-    display: none;
-  }
-  
+/* 5. Мобильные (<= 599px) */
+@media (max-width: 599px) {
   .center-stage {
-    grid-area: center;
-    height: auto;
-    min-height: 55vh;
-    padding: 15px;
+    padding: 10px;
   }
   
   .right-panel {
-    grid-area: right;
-    height: auto;
     padding: 15px;
-  }
-  
-  .wheel-container {
-    max-height: 45vh !important;
-  }
-}
-
-/* === МОБИЛЬНЫЕ МАЛЕНЬКИЕ (до 480px) === */
-@media (max-width: 479px) {
-  .main-container {
-    padding: 0;
-  }
-  
-  .center-stage,
-  .right-panel {
-    padding: 12px;
-  }
-  
-  .wheel-container {
-    max-height: 42vh !important;
   }
 }
 
 /* === ВЫСОТА ЭКРАНА === */
-@media (max-height: 700px) {
-  .left-panel,
-  .center-stage,
-  .right-panel {
-    padding: 15px;
-  }
-  
-  .wheel-container {
-    max-height: 50vh !important;
-  }
-}
-
-@media (max-height: 600px) {
-  .left-panel,
-  .center-stage,
-  .right-panel {
-    padding: 12px;
-  }
-  
-  .wheel-container {
-    max-height: 45vh !important;
-  }
-}
-
-/* === ЛАНДШАФТ === */
-@media (orientation: landscape) and (max-width: 900px) and (max-height: 600px) {
-  .main-container {
-    grid-template-columns: 1fr 320px;
-    grid-template-rows: 100vh;
-    grid-template-areas: none;
-  }
-  
+@media (max-height: 750px) and (min-width: 900px) {
   .center-stage {
-    grid-area: auto;
-    height: 100vh;
+    padding: 10px 5px;
   }
-  
-  .right-panel {
-    grid-area: auto;
-    height: 100vh;
+  .left-panel, .right-panel {
+    padding: 10px; /* Уменьшаем отступы на низких экранах */
   }
-  
-  .wheel-container {
-    max-height: 70vh !important;
-  }
-}
-
-/* === УБИРАЕМ СКРОЛЛЫ ГДЕ НЕ НУЖНО === */
-body {
-  overflow: hidden;
-  margin: 0;
-  padding: 0;
-}
-
-html {
-  overflow: hidden;
-  margin: 0;
-  padding: 0;
 }

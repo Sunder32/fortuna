@@ -1,7 +1,7 @@
 .sound-controls {
   display: flex;
   gap: 25px;
-  flex-wrap: nowrap;
+  flex-wrap: wrap;
   justify-content: center;
   align-items: center;
 }

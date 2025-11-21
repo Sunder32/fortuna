@@ -1,16 +1,16 @@
+/* Cleaned up Right Panel - Layout handled by Fullscreen.css */
+
 .right-panel {
-  flex: 0 0 250px;
-  display: flex;
-  flex-direction: column;
-  padding-top: 40px;
-  height: 100%;
-  overflow: hidden;
-  /* Небольшой наклон книги */
-  transform: perspective(1000px) rotateY(1deg);
+  /* Удалены конфликтующие свойства */
 }
 
 /* 🔥 АДСКАЯ КНИГА ЗАПИСЕЙ */
 .record-book {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden; /* Скрываем вылезающее на десктопе */
+  
   background: 
     /* Текстура кожи/пергамента */
     repeating-linear-gradient(
@@ -37,49 +37,33 @@
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
   box-shadow: 
-    /* Огненное свечение */
     0 0 60px rgba(255, 100, 40, 0.35),
     0 35px 90px rgba(0, 0, 0, 0.95),
-    /* Внутреннее свечение */
     inset 0 0 80px rgba(255, 80, 30, 0.1),
     inset 0 2px 0 rgba(255, 137, 56, 0.4),
-    inset 0 -2px 25px rgba(30, 10, 0, 0.7),
-    /* Тлеющий край */
-    inset 0 0 3px rgba(255, 120, 50, 0.6);
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  overflow: hidden;
+    inset 0 -2px 25px rgba(30, 10, 0, 0.7);
+    
   position: relative;
-  animation: bookFadeIn 0.8s ease-out, bookPulse 4s ease-in-out infinite;
+  animation: bookFadeIn 0.8s ease-out;
+  
+  /* Дефолтная минимальная высота */
+  min-height: 400px; 
 }
 
-@keyframes bookPulse {
-  0%, 100% {
-    box-shadow: 
-      0 0 60px rgba(255, 100, 40, 0.3),
-      0 35px 90px rgba(0, 0, 0, 0.95),
-      inset 0 0 80px rgba(255, 80, 30, 0.08),
-      inset 0 2px 0 rgba(255, 137, 56, 0.4),
-      inset 0 -2px 25px rgba(30, 10, 0, 0.7),
-      inset 0 0 3px rgba(255, 120, 50, 0.5);
-  }
-  50% {
-    box-shadow: 
-      0 0 80px rgba(255, 100, 40, 0.45),
-      0 35px 90px rgba(0, 0, 0, 0.95),
-      inset 0 0 100px rgba(255, 80, 30, 0.12),
-      inset 0 2px 0 rgba(255, 137, 56, 0.5),
-      inset 0 -2px 25px rgba(30, 10, 0, 0.7),
-      inset 0 0 3px rgba(255, 120, 50, 0.7);
+/* МОБИЛЬНАЯ АДАПТАЦИЯ КНИГИ */
+@media (max-width: 899px) {
+  .record-book {
+    overflow: visible; /* Разрешаем контенту вылезать (скроллит родитель) */
+    height: auto; /* Растягиваемся по содержимому */
+    min-height: 500px; /* Даем больше места на мобилках */
   }
 }
 
 /* 🔥 ЗАГОЛОВОК КНИГИ */
 .book-header {
   text-align: center;
-  margin-bottom: 20px;
-  padding-bottom: 20px;
+  margin-bottom: 15px;
+  padding-bottom: 15px;
   border-bottom: 2px solid transparent;
   border-image: linear-gradient(
     to right,
@@ -91,205 +75,42 @@
   ) 1;
   flex-shrink: 0;
   position: relative;
-  animation: headerFadeIn 1s ease-out 0.3s backwards;
 }
 
 .book-title {
-  font-size: 11px;
+  font-size: 10px;
   letter-spacing: 0.3em;
   text-transform: uppercase;
   color: #d4a574;
-  margin-bottom: 15px;
+  margin-bottom: 10px;
   font-weight: 500;
   text-shadow: 0 0 10px rgba(212, 165, 116, 0.3);
-  animation: titleShimmer 4s ease-in-out infinite;
 }
 
 /* 🔥 ГРАДИЕНТНЫЙ ГЛАВНЫЙ ЗАГОЛОВОК */
 .book-main-title {
-  font-size: 26px;
+  font-size: clamp(20px, 2.5vw, 26px);
   font-weight: 800;
   background: linear-gradient(135deg, #ff8938, #ff6b45, #c53030);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-  margin-bottom: 12px;
+  margin-bottom: 8px;
   text-transform: uppercase;
   letter-spacing: 0.1em;
   position: relative;
-  filter: drop-shadow(0 0 20px rgba(255, 107, 69, 0.5))
-          drop-shadow(0 0 40px rgba(255, 107, 69, 0.3))
-          drop-shadow(0 4px 8px rgba(0, 0, 0, 0.4));
-  animation: titleGlow 3s ease-in-out infinite,
-             titlePulse 4s ease-in-out infinite;
+  filter: drop-shadow(0 0 20px rgba(255, 107, 69, 0.5));
 }
 
 .book-description {
-  font-size: 13px;
-  color: #d4b4a4;
-  line-height: 1.6;
-  font-weight: 400;
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
-}
-
-.book-footer {
-  margin-top: auto;
-  padding-top: 20px;
-  border-top: 2px solid transparent;
-  border-image: linear-gradient(
-    to right,
-    transparent,
-    rgba(255, 137, 56, 0.4),
-    rgba(255, 107, 69, 0.6),
-    rgba(255, 137, 56, 0.4),
-    transparent
-  ) 1;
-  position: relative;
-  animation: footerFadeIn 1s ease-out 0.6s backwards;
-}
-
-/* 🔥 ОГНЕННАЯ ЛИНИЯ-РАЗДЕЛИТЕЛЬ */
-.book-footer::before {
-  content: '';
-  position: absolute;
-  top: -2px;
-  left: 0;
-  right: 0;
-  height: 2px;
-  background: linear-gradient(
-    to right,
-    transparent,
-    #ff8938,
-    #ff6b45,
-    #ff8938,
-    transparent
-  );
-  box-shadow: 0 0 10px rgba(255, 137, 56, 0.6);
-  animation: lineGlow 2s ease-in-out infinite;
-}
-
-.footer-note,
-.footer-warning,
-.footer-hint {
   font-size: 12px;
-  color: #b4a49a;
-  line-height: 1.6;
-  margin-bottom: 12px;
-  font-style: normal;
+  color: #d4b4a4;
+  line-height: 1.4;
   font-weight: 400;
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
-  animation: textFadeIn 0.6s ease-out backwards;
 }
 
-.footer-note {
-  animation-delay: 0.7s;
-}
-
-.footer-warning {
-  color: #d4b8a0;
-  animation-delay: 0.8s;
-  text-shadow: 0 0 8px rgba(255, 137, 56, 0.2),
-               0 2px 4px rgba(0, 0, 0, 0.5);
-}
-
-.footer-hint {
-  animation-delay: 0.9s;
-}
-
-/* 🔥 АНИМАЦИИ */
+/* Анимации */
 @keyframes bookFadeIn {
-  from {
-    opacity: 0;
-    transform: translateX(30px);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
-
-@keyframes headerFadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(-10px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@keyframes footerFadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(10px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@keyframes textFadeIn {
-  from {
-    opacity: 0;
-    transform: translateX(10px);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
-
-@keyframes cornerGlow {
-  0%, 100% {
-    box-shadow: 0 0 15px rgba(255, 137, 56, 0.4);
-    opacity: 0.8;
-  }
-  50% {
-    box-shadow: 0 0 25px rgba(255, 137, 56, 0.7);
-    opacity: 1;
-  }
-}
-
-@keyframes titleGlow {
-  0%, 100% {
-    filter: drop-shadow(0 0 20px rgba(255, 107, 69, 0.5))
-            drop-shadow(0 0 40px rgba(255, 107, 69, 0.3))
-            drop-shadow(0 4px 8px rgba(0, 0, 0, 0.4));
-  }
-  50% {
-    filter: drop-shadow(0 0 30px rgba(255, 107, 69, 0.8))
-            drop-shadow(0 0 60px rgba(255, 107, 69, 0.5))
-            drop-shadow(0 4px 8px rgba(0, 0, 0, 0.4));
-  }
-}
-
-@keyframes titlePulse {
-  0%, 100% {
-    transform: scale(1);
-  }
-  50% {
-    transform: scale(1.02);
-  }
-}
-
-@keyframes titleShimmer {
-  0%, 100% {
-    text-shadow: 0 0 10px rgba(212, 165, 116, 0.3);
-  }
-  50% {
-    text-shadow: 0 0 20px rgba(212, 165, 116, 0.6);
-  }
-}
-
-@keyframes lineGlow {
-  0%, 100% {
-    opacity: 0.6;
-    box-shadow: 0 0 10px rgba(255, 137, 56, 0.6);
-  }
-  50% {
-    opacity: 1;
-    box-shadow: 0 0 20px rgba(255, 137, 56, 0.9);
-  }
+  from { opacity: 0; transform: translateX(30px); }
+  to { opacity: 1; transform: translateX(0); }
 }

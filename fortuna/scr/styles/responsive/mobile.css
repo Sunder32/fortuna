@@ -75,27 +75,24 @@
     overflow-x: hidden;
   }
   
-  .main-container {
-    flex-direction: column;
-    min-height: 0;
-    padding: 15px;
-    gap: 25px;
-  }
+  /* 
+     Layout definitions moved to fullscreen.css 
+     Keeping component overrides here 
+  */
   
   .left-panel {
     display: none;
   }
   
+  /* Resetting widths for mobile flow */
   .right-panel {
-    flex: 1 1 auto;
     width: 100%;
-    max-width: 600px;
-    margin: 0 auto;
+    max-width: none;
+    margin: 0;
   }
   
   .center-stage {
     width: 100%;
-    order: -1;
   }
   
   .record-book {

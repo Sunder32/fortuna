@@ -1931,9 +1931,11 @@ export class HellWheel3D {
         this._showChaosMessage('🌀 НАЧИНАЕТСЯ ХАОС!!! 🌀', true);
         this._chaosFlash('mega');
         this._screenShake();
+        /*
         if (this.audioBus) {
           this.audioBus.speak?.('НАЧИНАЕТСЯ ХАОС!');
         }
+        */
         console.log('🌀🌀🌀 ФАЗА РАЗГОНА ЗАВЕРШЕНА - НАЧИНАЕТСЯ ХАОС!!!');
       }
       
